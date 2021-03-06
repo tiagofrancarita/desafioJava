@@ -9,9 +9,9 @@ public class Cliente {
 	private String nome;
 	private String email;
 	private LocalDate dtnasc;
-	private char sexo;
+	private String sexo;
 	private String estadocivil;
-	private char ativo;
+	private String ativo;
 	
 	
 	public Long getId() {
@@ -44,22 +44,24 @@ public class Cliente {
 	public void setDtnasc(LocalDate dtnasc) {
 		this.dtnasc = dtnasc;
 	}
-	public char getSexo() {
-		return sexo;
-	}
-	public void setSexo(char sexo) {
-		this.sexo = sexo;
-	}
+	
 	public String getEstadocivil() {
 		return estadocivil;
 	}
 	public void setEstadocivil(String estadocivil) {
 		this.estadocivil = estadocivil;
 	}
-	public char getAtivo() {
+	
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	public String getAtivo() {
 		return ativo;
 	}
-	public void setAtivo(char ativo) {
+	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
 	@Override

@@ -1,8 +1,11 @@
 package br.com.desafioJava.teste;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 
 import br.com.desafioJava.domain.Cliente;
@@ -20,9 +23,9 @@ public class Teste {
 		rodrigo.setNome("Rodrigo");
 		rodrigo.setEmail("rfranca@gmail.com");
 		rodrigo.setDtnasc(LocalDate.now()); // como configurar uma data no localdate;
-		rodrigo.setSexo('M');
+		rodrigo.setSexo("M");
 		rodrigo.setEstadocivil("Casado");
-		rodrigo.setAtivo('A');
+		rodrigo.setAtivo("A");
 		
 		System.out.println(rodrigo.toString());
 		
@@ -31,8 +34,34 @@ public class Teste {
 		// conexão com o banco de dados MySql
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/db_clientes?useTimezone=true&serverTimezone=UTC", "root", "Biatico68");
 		
+		Statement stm = connection.createStatement();
+		
+		boolean result = stm.execute("select * from tb_cliente");
+		
+		ResultSet resultSet = stm.getResultSet();
+		
+		System.out.println(result);
+		
+		boolean next = resultSet.next();
+		
+		System.out.println(next);
+		
+		
+		
+		
+		rodrigo.setId(resultSet.getLong(1));
+		rodrigo.setCpf(resultSet.getString(2));
+		rodrigo.setNome(resultSet.getString(3));
+		rodrigo.setEmail(resultSet.getString(4)); 
+		rodrigo.setDtnasc(resultSet.getDate(5).toLocalDate());
+		rodrigo.setSexo(resultSet.getString(6));
+		rodrigo.setEstadocivil (resultSet.getString(7));
+		rodrigo.setAtivo (resultSet.getString(8));
+		
+		System.out.println(rodrigo.toString());
+		
 		connection.close();
-	
+		
 	}
 
 }
