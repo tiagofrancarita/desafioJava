@@ -1,7 +1,6 @@
 package br.com.desafioJava.teste;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,6 +35,7 @@ public class Teste {
 		
 		Statement stm = connection.createStatement();
 		
+		/*Retorna os 
 		boolean result = stm.execute("select * from tb_cliente");
 		
 		ResultSet resultSet = stm.getResultSet();
@@ -45,9 +45,6 @@ public class Teste {
 		boolean next = resultSet.next();
 		
 		System.out.println(next);
-		
-		
-		
 		
 		rodrigo.setId(resultSet.getLong(1));
 		rodrigo.setCpf(resultSet.getString(2));
@@ -59,9 +56,18 @@ public class Teste {
 		rodrigo.setAtivo (resultSet.getString(8));
 		
 		System.out.println(rodrigo.toString());
+		*/
+		
+		//Faz insert no banco e retorna o id cadastrado.
+		stm.execute("INSERT INTO `db_clientes`.`tb_cliente`"
+		+ "(cpf,nome,email,dtnasc,sexo,estadocivil,ativo)"
+		+ "VALUES('114414','Tiago','tfranca@teste.com','1995-11-01','M','Solteiro','S')",Statement.RETURN_GENERATED_KEYS);
+		
+		ResultSet resultSet = stm.getResultSet();
+		resultSet = stm.getGeneratedKeys();
+		Long id = resultSet.getLong(1);
+		System.out.println(id);
 		
 		connection.close();
-		
 	}
-
 }
